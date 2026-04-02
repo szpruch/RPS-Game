@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
+
+    <div class="scoreboard">
+      <div class="score-block">
+        <span class="score-label">You</span>
+        <span class="score-value" id="player-score">0</span>
+      </div>
+      <div class="score-divider">—</div>
+      <div class="score-block">
+        <span class="score-label">CPU</span>
+        <span class="score-value" id="cpu-score">0</span>
+      </div>
+    </div>
+
+    <div class="battle-area">
+      <div class="choice-display" id="player-display">
+        <div class="choice-icon" id="player-icon">❓</div>
+        <span class="choice-label">You</span>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="choice-display" id="cpu-display">
+        <div class="choice-icon" id="cpu-icon">❓</div>
+        <span class="choice-label">CPU</span>
+      </div>
+    </div>
+
+    <div class="result-banner" id="result-banner">
+      <span id="result-text">Pick your move!</span>
+    </div>
+
+    <div class="choices">
+      <button class="choice-btn" data-choice="rock" title="Rock">
+        <span class="btn-icon">🪨</span>
+        <span class="btn-label">Rock</span>
+      </button>
+      <button class="choice-btn" data-choice="paper" title="Paper">
+        <span class="btn-icon">📄</span>
+        <span class="btn-label">Paper</span>
+      </button>
+      <button class="choice-btn" data-choice="scissors" title="Scissors">
+        <span class="btn-icon">✂️</span>
+        <span class="btn-label">Scissors</span>
+      </button>
+    </div>
+
+    <button class="reset-btn" id="reset-btn">Reset Score</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
