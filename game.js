@@ -1,5 +1,5 @@
 // TODO: replace with Render URL after deploy
-const SERVER_URL = 'http://localhost:3000';
+const SERVER_URL = 'https://rps-server-jxsx.onrender.com';
 
 // ── Constants ─────────────────────────────────────────────────────────────
 
