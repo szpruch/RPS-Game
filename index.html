@@ -7,7 +7,98 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+
+  <!-- ════════════════════════════════════════════════
+       SCREEN 1 — Home
+  ════════════════════════════════════════════════ -->
+  <div class="screen" id="screen-home">
+    <header>
+      <h1>Rock Paper Scissors</h1>
+      <p class="tagline">Choose your battle</p>
+    </header>
+
+    <div class="mode-cards">
+      <button class="mode-card" id="btn-vs-cpu">
+        <span class="mode-icon">🤖</span>
+        <span class="mode-label">vs Computer</span>
+        <span class="mode-sub">Classic solo play</span>
+      </button>
+      <button class="mode-card" id="btn-vs-player">
+        <span class="mode-icon">🌐</span>
+        <span class="mode-label">vs Player Online</span>
+        <span class="mode-sub">Challenge a friend</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SCREEN 2 — Multiplayer Lobby
+  ════════════════════════════════════════════════ -->
+  <div class="screen hidden" id="screen-lobby">
+    <button class="back-btn" id="lobby-back">&#8592; Back</button>
+
+    <header>
+      <h1>Online Lobby</h1>
+      <p class="tagline">Create or join a room</p>
+    </header>
+
+    <div class="lobby-section">
+      <button class="primary-btn" id="btn-create-room">Create Room</button>
+    </div>
+
+    <div class="lobby-divider"><span>or</span></div>
+
+    <div class="lobby-section">
+      <label class="lobby-label" for="join-code-input">Enter Room Code</label>
+      <div class="join-row">
+        <input
+          type="text"
+          id="join-code-input"
+          class="code-input"
+          maxlength="4"
+          placeholder="0000"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="primary-btn" id="btn-join-room">Join</button>
+      </div>
+      <p class="error-msg hidden" id="lobby-error"></p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SCREEN 3 — Waiting (after creating room)
+  ════════════════════════════════════════════════ -->
+  <div class="screen hidden" id="screen-waiting">
+    <button class="back-btn" id="waiting-back">&#8592; Back</button>
+
+    <header>
+      <h1>Room Created</h1>
+      <p class="tagline">Share this code with your opponent</p>
+    </header>
+
+    <div class="room-code-display" id="waiting-code">----</div>
+
+    <div class="waiting-indicator">
+      <span class="waiting-dot"></span>
+      <span class="waiting-dot"></span>
+      <span class="waiting-dot"></span>
+      <span class="waiting-text">Waiting for opponent...</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SCREEN 4 — Game (single-player & multiplayer)
+  ════════════════════════════════════════════════ -->
+  <div class="screen hidden" id="screen-game">
+    <button class="back-btn" id="game-back">&#8592; Back</button>
+
+    <!-- Status bar (only visible in multiplayer) -->
+    <div class="status-bar hidden" id="game-status-bar">
+      <span id="status-mode-label"></span>
+      <span class="status-code hidden" id="status-room-code"></span>
+    </div>
+
     <header>
       <h1>Rock Paper Scissors</h1>
     </header>
@@ -19,7 +110,7 @@
       </div>
       <div class="score-divider">—</div>
       <div class="score-block">
-        <span class="score-label">CPU</span>
+        <span class="score-label" id="opponent-score-label">CPU</span>
         <span class="score-value" id="cpu-score">0</span>
       </div>
     </div>
@@ -32,7 +123,7 @@
       <div class="vs-badge">VS</div>
       <div class="choice-display" id="cpu-display">
         <div class="choice-icon" id="cpu-icon">❓</div>
-        <span class="choice-label">CPU</span>
+        <span class="choice-label" id="cpu-display-label">CPU</span>
       </div>
     </div>
 
@@ -40,16 +131,22 @@
       <span id="result-text">Pick your move!</span>
     </div>
 
+    <!-- Multiplayer waiting message (shown while waiting for opponent move) -->
+    <div class="mp-waiting hidden" id="mp-waiting-msg">
+      <span class="mp-waiting-dot"></span>
+      Waiting for opponent's move...
+    </div>
+
     <div class="choices">
-      <button class="choice-btn" data-choice="rock" title="Rock">
+      <button class="choice-btn" data-choice="rock" title="Rock (R)">
         <span class="btn-icon">🪨</span>
         <span class="btn-label">Rock</span>
       </button>
-      <button class="choice-btn" data-choice="paper" title="Paper">
+      <button class="choice-btn" data-choice="paper" title="Paper (P)">
         <span class="btn-icon">📄</span>
         <span class="btn-label">Paper</span>
       </button>
-      <button class="choice-btn" data-choice="scissors" title="Scissors">
+      <button class="choice-btn" data-choice="scissors" title="Scissors (S)">
         <span class="btn-icon">✂️</span>
         <span class="btn-label">Scissors</span>
       </button>
@@ -58,6 +155,8 @@
     <button class="reset-btn" id="reset-btn">Reset Score</button>
   </div>
 
+  <!-- Socket.io CDN (only used in multiplayer; harmless if unused) -->
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
