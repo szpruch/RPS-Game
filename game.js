@@ -19,15 +19,15 @@ const OUTCOME = {
 };
 
 const RESULT_MESSAGES = {
-  win:  ['You win!', 'Nice one!', 'Crushed it!', 'You got em!'],
-  lose: ['Opponent wins!', 'So close...', 'Better luck next time!', 'They win this round!'],
-  draw: ["It's a draw!", 'Great minds think alike.', 'Dead even!'],
+  win:  ['ניצחת!', 'כל הכבוד!', 'מחקת אותו!', 'מדהים!'],
+  lose: ['היריב ניצח!', 'כמעט...', 'בפעם הבאה!', 'הפסדת הסיבוב הזה!'],
+  draw: ['תיקו!', 'מוחות גדולים חושבים אותו דבר.', 'שוויון מוחלט!'],
 };
 
 const CPU_RESULT_MESSAGES = {
-  win:  ['You win!', 'Nice one!', 'Crushed it!', 'You got em!'],
-  lose: ['CPU wins!', 'So close...', 'Better luck next time!', 'CPU wins this round!'],
-  draw: ["It's a draw!", 'Great minds think alike.', 'Dead even!'],
+  win:  ['ניצחת!', 'כל הכבוד!', 'מחקת אותו!', 'מדהים!'],
+  lose: ['המחשב ניצח!', 'כמעט...', 'בפעם הבאה!', 'המחשב ניצח הסיבוב!'],
+  draw: ['תיקו!', 'מוחות גדולים חושבים אותו דבר.', 'שוויון מוחלט!'],
 };
 
 // ── State ─────────────────────────────────────────────────────────────────
@@ -139,7 +139,7 @@ function resetGameUI() {
   cpuScoreEl.textContent    = '0';
   playerIconEl.textContent  = '❓';
   cpuIconEl.textContent     = '❓';
-  resultText.textContent    = 'Pick your move!';
+  resultText.textContent    = 'בחר את המהלך שלך!';
   clearStates();
   state.locked = false;
   state.waitingForOpponent = false;
@@ -230,7 +230,7 @@ function connectSocket() {
   state.socket = io(SERVER_URL, { transports: ['websocket', 'polling'] });
 
   state.socket.on('connect_error', () => {
-    showLobbyError('Cannot reach server. Is it running?');
+    showLobbyError('לא ניתן להתחבר לשרת. נסה שוב.');
   });
 
   // ── room_created ───────────────────────────────────────────────────────
@@ -284,7 +284,7 @@ function connectSocket() {
 
   // ── opponent_left ──────────────────────────────────────────────────────
   state.socket.on('opponent_left', () => {
-    alert('Your opponent has left the game.');
+    alert('היריב שלך עזב את המשחק.');
     leaveToHome();
   });
 
@@ -326,7 +326,7 @@ function playMultiplayer(playerChoice) {
   // Disable buttons and show waiting message
   setButtonsDisabled(true);
   mpWaitingMsg.classList.remove('hidden');
-  resultText.textContent = 'Move sent!';
+  resultText.textContent = 'מהלך נשלח!';
 
   state.socket.emit('make_move', playerChoice);
 
@@ -341,14 +341,14 @@ function enterGameScreen(mode) {
   resetGameUI();
 
   if (mode === 'cpu') {
-    opponentScoreLabel.textContent = 'CPU';
-    cpuDisplayLabel.textContent    = 'CPU';
+    opponentScoreLabel.textContent = 'מחשב';
+    cpuDisplayLabel.textContent    = 'מחשב';
     gameStatusBar.classList.add('hidden');
     resetBtn.style.display = '';
   } else {
-    opponentScoreLabel.textContent = 'Opponent';
-    cpuDisplayLabel.textContent    = 'Opponent';
-    statusModeLabel.textContent    = 'Online Match';
+    opponentScoreLabel.textContent = 'יריב';
+    cpuDisplayLabel.textContent    = 'יריב';
+    statusModeLabel.textContent    = 'משחק אונליין';
     statusRoomCode.textContent     = state.roomCode || '';
     if (state.roomCode) {
       statusRoomCode.classList.remove('hidden');
@@ -405,7 +405,7 @@ btnCreateRoom.addEventListener('click', () => {
 btnJoinRoom.addEventListener('click', () => {
   const code = joinCodeInput.value.trim();
   if (code.length !== 4 || !/^\d{4}$/.test(code)) {
-    showLobbyError('Please enter a valid 4-digit code.');
+    showLobbyError('אנא הכנס קוד בן 4 ספרות תקין.');
     return;
   }
   hideLobbyError();
@@ -472,7 +472,7 @@ resetBtn.addEventListener('click', () => {
   cpuScoreEl.textContent    = '0';
   playerIconEl.textContent  = '❓';
   cpuIconEl.textContent     = '❓';
-  resultText.textContent    = 'Pick your move!';
+  resultText.textContent    = 'בחר את המהלך שלך!';
   clearStates();
   state.locked = false;
 });

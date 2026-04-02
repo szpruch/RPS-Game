@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Paper Scissors</title>
-  <link rel="stylesheet" href="style.css?v=2">
+  <title>אבן נייר מספריים</title>
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -13,20 +13,20 @@
   ════════════════════════════════════════════════ -->
   <div class="screen" id="screen-home">
     <header>
-      <h1>Rock Paper Scissors</h1>
-      <p class="tagline">Choose your battle</p>
+      <h1>אבן נייר מספריים</h1>
+      <p class="tagline">בחר את הקרב שלך</p>
     </header>
 
     <div class="mode-cards">
       <button class="mode-card" id="btn-vs-cpu">
         <span class="mode-icon">🤖</span>
-        <span class="mode-label">vs Computer</span>
-        <span class="mode-sub">Classic solo play</span>
+        <span class="mode-label">נגד מחשב</span>
+        <span class="mode-sub">משחק יחיד קלאסי</span>
       </button>
       <button class="mode-card" id="btn-vs-player">
         <span class="mode-icon">🌐</span>
-        <span class="mode-label">vs Player Online</span>
-        <span class="mode-sub">Challenge a friend</span>
+        <span class="mode-label">נגד שחקן אונליין</span>
+        <span class="mode-sub">אתגר חבר</span>
       </button>
     </div>
   </div>
@@ -35,22 +35,23 @@
        SCREEN 2 — Multiplayer Lobby
   ════════════════════════════════════════════════ -->
   <div class="screen hidden" id="screen-lobby">
-    <button class="back-btn" id="lobby-back">&#8592; Back</button>
+    <button class="back-btn" id="lobby-back">חזרה &#8592;</button>
 
     <header>
-      <h1>Online Lobby</h1>
-      <p class="tagline">Create or join a room</p>
+      <h1>לובי אונליין</h1>
+      <p class="tagline">צור חדר או הצטרף לחדר קיים</p>
     </header>
 
     <div class="lobby-section">
-      <button class="primary-btn" id="btn-create-room">Create Room</button>
+      <button class="primary-btn" id="btn-create-room">צור חדר</button>
     </div>
 
-    <div class="lobby-divider"><span>or</span></div>
+    <div class="lobby-divider"><span>או</span></div>
 
     <div class="lobby-section">
-      <label class="lobby-label" for="join-code-input">Enter Room Code</label>
+      <label class="lobby-label" for="join-code-input">הכנס קוד חדר</label>
       <div class="join-row">
+        <button class="primary-btn" id="btn-join-room">הצטרף</button>
         <input
           type="text"
           id="join-code-input"
@@ -59,8 +60,8 @@
           placeholder="0000"
           autocomplete="off"
           spellcheck="false"
+          inputmode="numeric"
         />
-        <button class="primary-btn" id="btn-join-room">Join</button>
       </div>
       <p class="error-msg hidden" id="lobby-error"></p>
     </div>
@@ -70,11 +71,11 @@
        SCREEN 3 — Waiting (after creating room)
   ════════════════════════════════════════════════ -->
   <div class="screen hidden" id="screen-waiting">
-    <button class="back-btn" id="waiting-back">&#8592; Back</button>
+    <button class="back-btn" id="waiting-back">חזרה &#8592;</button>
 
     <header>
-      <h1>Room Created</h1>
-      <p class="tagline">Share this code with your opponent</p>
+      <h1>החדר נוצר</h1>
+      <p class="tagline">שתף את הקוד עם היריב שלך</p>
     </header>
 
     <div class="room-code-display" id="waiting-code">----</div>
@@ -83,7 +84,7 @@
       <span class="waiting-dot"></span>
       <span class="waiting-dot"></span>
       <span class="waiting-dot"></span>
-      <span class="waiting-text">Waiting for opponent...</span>
+      <span class="waiting-text">ממתין ליריב...</span>
     </div>
   </div>
 
@@ -91,7 +92,7 @@
        SCREEN 4 — Game (single-player & multiplayer)
   ════════════════════════════════════════════════ -->
   <div class="screen hidden" id="screen-game">
-    <button class="back-btn" id="game-back">&#8592; Back</button>
+    <button class="back-btn" id="game-back">חזרה &#8592;</button>
 
     <!-- Status bar (only visible in multiplayer) -->
     <div class="status-bar hidden" id="game-status-bar">
@@ -100,17 +101,17 @@
     </div>
 
     <header>
-      <h1>Rock Paper Scissors</h1>
+      <h1>אבן נייר מספריים</h1>
     </header>
 
     <div class="scoreboard">
       <div class="score-block">
-        <span class="score-label">You</span>
+        <span class="score-label">את/ה</span>
         <span class="score-value" id="player-score">0</span>
       </div>
       <div class="score-divider">—</div>
       <div class="score-block">
-        <span class="score-label" id="opponent-score-label">CPU</span>
+        <span class="score-label" id="opponent-score-label">מחשב</span>
         <span class="score-value" id="cpu-score">0</span>
       </div>
     </div>
@@ -118,45 +119,43 @@
     <div class="battle-area">
       <div class="choice-display" id="player-display">
         <div class="choice-icon" id="player-icon">❓</div>
-        <span class="choice-label">You</span>
+        <span class="choice-label">את/ה</span>
       </div>
       <div class="vs-badge">VS</div>
       <div class="choice-display" id="cpu-display">
         <div class="choice-icon" id="cpu-icon">❓</div>
-        <span class="choice-label" id="cpu-display-label">CPU</span>
+        <span class="choice-label" id="cpu-display-label">מחשב</span>
       </div>
     </div>
 
     <div class="result-banner" id="result-banner">
-      <span id="result-text">Pick your move!</span>
+      <span id="result-text">בחר את המהלך שלך!</span>
     </div>
 
-    <!-- Multiplayer waiting message (shown while waiting for opponent move) -->
     <div class="mp-waiting hidden" id="mp-waiting-msg">
       <span class="mp-waiting-dot"></span>
-      Waiting for opponent's move...
+      ממתין למהלך היריב...
     </div>
 
     <div class="choices">
-      <button class="choice-btn" data-choice="rock" title="Rock (R)">
+      <button class="choice-btn" data-choice="rock" title="אבן (A)">
         <span class="btn-icon">🪨</span>
-        <span class="btn-label">Rock</span>
+        <span class="btn-label">אבן</span>
       </button>
-      <button class="choice-btn" data-choice="paper" title="Paper (P)">
+      <button class="choice-btn" data-choice="paper" title="נייר (N)">
         <span class="btn-icon">📄</span>
-        <span class="btn-label">Paper</span>
+        <span class="btn-label">נייר</span>
       </button>
-      <button class="choice-btn" data-choice="scissors" title="Scissors (S)">
+      <button class="choice-btn" data-choice="scissors" title="מספריים (M)">
         <span class="btn-icon">✂️</span>
-        <span class="btn-label">Scissors</span>
+        <span class="btn-label">מספריים</span>
       </button>
     </div>
 
-    <button class="reset-btn" id="reset-btn">Reset Score</button>
+    <button class="reset-btn" id="reset-btn">אפס ניקוד</button>
   </div>
 
-  <!-- Socket.io CDN (only used in multiplayer; harmless if unused) -->
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-  <script src="game.js"></script>
+  <script src="game.js?v=3"></script>
 </body>
 </html>
