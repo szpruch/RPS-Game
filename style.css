@@ -639,6 +639,8 @@ header h1 {
   .choice-btn { padding: 16px 10px; }
   .btn-icon { font-size: 1.8rem; }
   .room-code-display { padding: 20px 28px; letter-spacing: 0.1em; }
+  .join-row { flex-direction: column; }
+  .join-row .primary-btn { width: 100%; }
 }
 
 @media (max-height: 720px) {
